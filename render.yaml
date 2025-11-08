@@ -3,7 +3,7 @@ projects:
     environments:
       - name: Dev
         databases:
-        - name: example-tracker
+        - name: example-tracker-dev
           databaseName: db1_pbny
           user: superuser
           plan: free
@@ -11,7 +11,7 @@ projects:
           ipAllowList:
           - source: 0.0.0.0/0
             description: everywhere
-        postgresMajorVersion: "17"
+          postgresMajorVersion: "17"
         services:
           - type: web
             plan: free
@@ -57,7 +57,7 @@ projects:
           ipAllowList:
           - source: 0.0.0.0/0
             description: everywhere
-        postgresMajorVersion: "17"
+          postgresMajorVersion: "17"
         services:
           - type: web
             plan: free
