@@ -2,6 +2,16 @@ projects:
   - name: Expense Tracker
     environments:
       - name: Dev
+        databases:
+        - name: example-tracker
+          databaseName: db1_pbny
+          user: superuser
+          plan: free
+          region: frankfurt
+          ipAllowList:
+          - source: 0.0.0.0/0
+            description: everywhere
+        postgresMajorVersion: "17"
         services:
           - type: web
             plan: free
@@ -38,6 +48,16 @@ projects:
                 value: https://<backend-dev-host>
 
       - name: Production
+        databases:
+        - name: example-tracker
+          databaseName: db1_pbny
+          user: superuser
+          plan: free
+          region: frankfurt
+          ipAllowList:
+          - source: 0.0.0.0/0
+            description: everywhere
+        postgresMajorVersion: "17"
         services:
           - type: web
             plan: free
