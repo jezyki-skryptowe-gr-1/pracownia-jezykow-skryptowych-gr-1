@@ -22,10 +22,10 @@ frontend: start-frontend
 tests: backend-tests
 
 # DB tests
-backend-tests: db-tests
+backend-tests: integration-tests
 
-db-tests:
-	bash bash/backend/db-tests-run.sh
+integration-tests:
+	bash bash/backend/integration-tests-run.sh
 
 # Dev goals
 dev: start-backend 

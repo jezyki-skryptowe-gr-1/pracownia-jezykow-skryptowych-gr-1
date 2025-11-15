@@ -23,17 +23,23 @@ jobs:
         run: make build-backend
 
   db-tests:
-    name: Database Tests
+    name: Integration Tests
     runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python 3.14
         uses: actions/setup-python@v5
         with:
           python-version: '3.14'
-      - name: Run DB Tests
-        run: make db-tests
+
+      - name: Install backend dependencies
+        run: make build-backend
+
+      - name: Run Integration Tests
+        run: make integration-tests
+
 
   deploy:
     name: Deploy to Render
