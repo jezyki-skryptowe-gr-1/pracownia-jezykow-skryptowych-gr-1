@@ -1,7 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { LayoutDashboard, CreditCard, DollarSign, PieChart } from 'lucide-react'
+import { LayoutDashboard, CreditCard, DollarSign, PieChart as PieChartIcon } from 'lucide-react'
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts'
+
+const pieData = [
+    { name: 'Food', value: 35 },
+    { name: 'Transport', value: 23 },
+    { name: 'Utilities', value: 19 },
+    { name: 'Other', value: 23 },
+]
+
+const COLORS = ['#4CAF50', '#FF9800', '#2196F3', '#9C27B0']
 
 export const Route = createFileRoute('/_dashboardLayout/dashboard')({
     component: DashboardIndex,
@@ -43,7 +53,7 @@ function DashboardIndex() {
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <StatCard title="Total Balance" value="$12,430" icon={<CreditCard className="h-6 w-6" />} />
                     <StatCard title="Monthly Spend" value="$1,230" icon={<DollarSign className="h-6 w-6" />} />
-                    <StatCard title="Reports" value="4" icon={<PieChart className="h-6 w-6" />} />
+                    <StatCard title="Reports" value="4" icon={<PieChartIcon className="h-6 w-6" />} />
                 </section>
 
                 {/* Middle content */}
@@ -55,9 +65,27 @@ function DashboardIndex() {
                                 <CardDescription>Overview of expenses</CardDescription>
                             </CardHeader>
                             <CardContent className="p-4">
-                                <div className="h-60 flex items-center justify-center text-sm text-muted-foreground">
-                                    Chart placeholder — integrate a chart library (e.g. Recharts)
-                                </div>
+                                                <div className="h-60">
+                                                    <ResponsiveContainer width="100%" height="100%">
+                                                        <PieChart>
+                                                            <Pie
+                                                                data={pieData}
+                                                                dataKey="value"
+                                                                nameKey="name"
+                                                                cx="50%"
+                                                                cy="50%"
+                                                                innerRadius={40}
+                                                                outerRadius={80}
+                                                                paddingAngle={4}
+                                                            >
+                                                                {pieData.map((_, idx) => (
+                                                                    <Cell key={`cell-${idx}`} fill={COLORS[idx % COLORS.length]} />
+                                                                ))}
+                                                            </Pie>
+                                                            <Tooltip formatter={(value: number) => `$${value}`} />
+                                                        </PieChart>
+                                                    </ResponsiveContainer>
+                                                </div>
                             </CardContent>
                             <CardFooter className="px-4 py-3">
                                 <Button variant="ghost">View full report</Button>
