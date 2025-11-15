@@ -63,7 +63,7 @@ const LoginForm = () => {
             <CardFooter className="flex flex-col space-y-4">
                 <div className="text-sm text-center text-muted-foreground">
                     Nie masz konta?{' '}
-                    <Link to="/signup" className="text-primary hover:underline font-medium">
+                    <Link to="/signup" className="text-primary hover:underline font-medium" viewTransition>
                         Zarejestruj się
                     </Link>
                 </div>

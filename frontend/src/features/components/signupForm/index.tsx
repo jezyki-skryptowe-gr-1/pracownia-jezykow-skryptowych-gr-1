@@ -78,7 +78,7 @@ const SignupForm = () => {
             <CardFooter className="flex flex-col space-y-4">
                 <div className="text-sm text-center text-muted-foreground">
                     Masz już konto?{' '}
-                    <Link to="/" className="text-primary hover:underline font-medium">
+                    <Link to="/" className="text-primary hover:underline font-medium" viewTransition>
                         Zaloguj się
                     </Link>
                 </div>
