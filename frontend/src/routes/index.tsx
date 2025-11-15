@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import SignupForm from '@/features/components/signupForm'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
@@ -7,9 +7,8 @@ export const Route = createFileRoute('/')({
 
 function App() {
     return (
-        <div className="text-center">
-            ELO
-            <Button>XD</Button>
+        <div className="text-center flex items-center justify-center w-full min-h-screen">
+            <SignupForm />
         </div>
     )
 }
