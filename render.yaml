@@ -4,7 +4,7 @@ projects:
       - name: Production
         databases:
         - name: expense-tracker-db-prod
-          databaseName: pjsExpensesDB0
+          databaseName: expenses_db0
           user: superuser
           plan: free
           region: frankfurt
