@@ -4,10 +4,19 @@ on:
   push:
     branches:
       - '**'
+    paths:
+      - 'backend/**'
+      - 'bash/backend/**'
+      - '.github/workflows/backend*'
   pull_request:
     branches:
       - '**'
+    paths:
+      - 'backend/**'
+      - 'bash/backend/**'
+      - '.github/workflows/backend*'
   workflow_dispatch:
+
 
 jobs:
   build:
