@@ -4,10 +4,19 @@ on:
   push:
     branches:
       - '**'
+    paths:
+      - 'backend/**'
+      - 'tools/*-backend'
+      - '.github/workflows/backend*'
   pull_request:
     branches:
       - '**'
+    paths:
+      - 'backend/**'
+      - 'tools/*-backend'
+      - '.github/workflows/backend*'
   workflow_dispatch:
+
 
 jobs:
   build:
@@ -35,10 +44,10 @@ jobs:
           python-version: '3.14'
 
       - name: Install backend dependencies
-        run: make build-backend
+        run: ./tools/build-backend
 
       - name: Run Integration Tests
-        run: make integration-tests
+        run: ./tools/test-backend
 
 
   deploy:
