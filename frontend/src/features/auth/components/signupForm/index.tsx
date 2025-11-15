@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import FormInput from '@/components/formInput'
-import { signupSchema, type SignupFormData } from '@/features/schemas'
+import { signupSchema, type SignupFormData } from '@/features/auth/schemas'
 import { Lock, Mail, User } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 

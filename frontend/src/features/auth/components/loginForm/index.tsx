@@ -6,7 +6,7 @@ import {
     Form,
 } from '@/components/ui/form'
 import FormInput from '@/components/formInput'
-import { loginSchema, type LoginFormData } from '@/features/schemas'
+import { loginSchema, type LoginFormData } from '@/features/auth/schemas'
 import { Lock, Mail } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 
