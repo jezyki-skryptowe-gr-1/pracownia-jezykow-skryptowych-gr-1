@@ -25,7 +25,7 @@ tests: backend-tests
 backend-tests: db-tests
 
 db-tests:
-	bash bash/tests/run-db-tests.sh
+	bash bash/backend/db-tests-run.sh
 
 # Dev goals
 dev: start-backend 
