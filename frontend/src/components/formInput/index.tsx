@@ -3,7 +3,7 @@ import { type Path, useFormContext } from 'react-hook-form'
 import { FormControl, FormDescription, FormField, FormItem, FormMessage } from '../ui/form';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { Mail, Lock, User, type LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 type Props<T> = {
     name: Path<T>;
