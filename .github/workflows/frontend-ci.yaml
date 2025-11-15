@@ -1,0 +1,36 @@
+name: Frontend Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Frontend build
+        run: make build-frontend
+
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main')
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy PROD
+        if: github.ref == 'refs/heads/main'
+        env:
+          RENDER_FRONTEND_PROD_HOOK: ${{ secrets.RENDER_FRONTEND_PROD_HOOK }}
+        run: bash bash/frontend/deploy-prod.sh
