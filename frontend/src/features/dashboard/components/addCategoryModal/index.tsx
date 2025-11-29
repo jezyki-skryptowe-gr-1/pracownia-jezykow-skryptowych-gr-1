@@ -42,8 +42,7 @@ export function AddCategoryModal({ open, onOpenChange }: AddCategoryModalProps) 
     })
 
     const onSubmit = (data: AddCategoryFormData) => {
-        console.log("[v0] Adding category:", data)
-        // TODO: Implement category adding logic
+        console.log("Adding category:", data)
         form.reset()
         onOpenChange(false)
     }
@@ -61,22 +60,11 @@ export function AddCategoryModal({ open, onOpenChange }: AddCategoryModalProps) 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <div className="grid gap-4 py-4">
-                            <FormField
-                                control={form.control}
+                            <FormInput<AddCategoryFormData>
                                 name="name"
-                                render={() => (
-                                    <FormItem>
-                                        <FormControl>
-                                            <FormInput<AddCategoryFormData>
-                                                name="name"
-                                                label="Nazwa kategorii"
-                                                placeholder="np. Rozrywka, Zdrowie..."
-                                                icon={Tag}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                label="Nazwa kategorii"
+                                placeholder="np. Rozrywka, Zdrowie..."
+                                icon={Tag}
                             />
                             <FormField
                                 control={form.control}
@@ -99,7 +87,6 @@ export function AddCategoryModal({ open, onOpenChange }: AddCategoryModalProps) 
                                                             backgroundColor: color.value,
                                                             borderColor: field.value === color.value ? "hsl(var(--primary))" : "transparent",
                                                         }}
-                                                        aria-label={color.name}
                                                     />
                                                 ))}
                                             </div>

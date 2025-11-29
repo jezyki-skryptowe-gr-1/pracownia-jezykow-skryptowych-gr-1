@@ -10,7 +10,7 @@ import { loginSchema, type LoginFormData } from '@/features/auth/schemas'
 import { Lock, Mail } from 'lucide-react'
 import { Link, useRouter } from '@tanstack/react-router'
 import { useLoginMutation } from '@/features/auth/query'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
 // import apiClient from '@/lib/api'
 
 const LoginForm = () => {
@@ -25,8 +25,8 @@ const LoginForm = () => {
         }
     })
 
-    const onSubmit = (data: LoginFormData) => {
-        router.navigate({ to: '/dashboard' })
+    const onSubmit = (_data: LoginFormData) => {
+        router.navigate({ to: '/dashboard', viewTransition: true })
 
         // loginMutation.mutate(data, {
         //     onSuccess: async () => {

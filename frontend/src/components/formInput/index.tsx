@@ -45,7 +45,7 @@ const InputField = <T,>({
                                 type={type}
                                 disabled={disabled}
                                 step={step}
-                                className={`pl-10 h-11 bg-input border-border/50 focus-visible:ring-primary`}
+                                className={`pl-10 h-11 border-border/50 focus-visible:ring-primary`}
                             />
                         </div>
                     </FormControl>

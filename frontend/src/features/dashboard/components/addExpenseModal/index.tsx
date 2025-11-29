@@ -40,8 +40,7 @@ export function AddExpenseModal({ open, onOpenChange }: AddExpenseModalProps) {
         }
     })
 
-    const onSubmit = (data: AddExpenseFormData) => {
-        console.log("[v0] Adding expense:", data)
+    const onSubmit = (_data: AddExpenseFormData) => {
         form.reset()
         onOpenChange(false)
     }
@@ -59,41 +58,20 @@ export function AddExpenseModal({ open, onOpenChange }: AddExpenseModalProps) {
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <div className="grid gap-4 py-4">
-                            <FormField
-                                control={form.control}
-                                name="description"
-                                render={() => (
-                                    <FormItem>
-                                        <FormControl>
-                                            <FormInput<AddExpenseFormData>
-                                                name="description"
-                                                label="Opis"
-                                                placeholder="np. Zakupy w Biedronce"
-                                                icon={FileText}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                            <FormInput<AddExpenseFormData>
+                                name="amount"
+                                label="Kwota (PLN)"
+                                type="number"
+                                step="0.01"
+                                placeholder="0.00"
+                                icon={DollarSign}
                             />
                             <div className="grid grid-cols-2 gap-4">
-                                <FormField
-                                    control={form.control}
-                                    name="amount"
-                                    render={() => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <FormInput<AddExpenseFormData>
-                                                    name="amount"
-                                                    label="Kwota (PLN)"
-                                                    type="number"
-                                                    step="0.01"
-                                                    placeholder="0.00"
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
+                                <FormInput<AddExpenseFormData>
+                                    name="description"
+                                    label="Opis"
+                                    placeholder="Na co wydałeś pieniądze?"
+                                    icon={FileText}
                                 />
                                 <FormField
                                     control={form.control}
@@ -153,7 +131,6 @@ export function AddExpenseModal({ open, onOpenChange }: AddExpenseModalProps) {
                                                     disabled={(date) =>
                                                         date > new Date() || date < new Date("1900-01-01")
                                                     }
-                                                    initialFocus
                                                 />
                                             </PopoverContent>
                                         </Popover>
