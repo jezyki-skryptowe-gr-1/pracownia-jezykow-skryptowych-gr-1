@@ -30,6 +30,15 @@ def create_app() -> Flask:
     def health():
         return jsonify({"status": "ok"}), 200
 
+    @app.post("/api/v1/me")
+    def add_user():
+        data = request.get_json()
+        lgn = data["login"]
+        password = data["password"]
+        # zwraca 401 jeśli nie jest zalogowany
+        # przyjmuje cookie
+        return "", 200
+
     @app.post("/api/v1/register")
     def add_user():
         data = request.get_json()
@@ -42,12 +51,16 @@ def create_app() -> Flask:
         data = request.get_json()
         lgn = data["login"]
         password = data["password"]
-        return "", 200
+        response = {
+            "auth_token": 123   # todo
+        }
+        return response, 200
 
     @app.put("/api/v1/refresh_token")
     def refresh_token():
+        # zwraca cookie http-only
         response = {
-            "token": users_service.refresh_token()
+            "refresh_token": users_service.refresh_token()
         }
         return jsonify(response), 200
 
