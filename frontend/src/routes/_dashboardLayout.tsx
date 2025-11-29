@@ -1,5 +1,5 @@
-import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
-import { requireAuth } from '@/utils'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
+// import { requireAuth } from '@/utils'
 
 export const Route = createFileRoute('/_dashboardLayout')({
     // beforeLoad: async () => {

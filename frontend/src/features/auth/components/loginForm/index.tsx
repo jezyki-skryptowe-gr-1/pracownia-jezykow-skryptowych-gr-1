@@ -11,6 +11,8 @@ import { Lock, Mail } from 'lucide-react'
 import { Link, useRouter } from '@tanstack/react-router'
 import { useLoginMutation } from '@/features/auth/query'
 import { toast } from 'react-toastify'
+import { setUser } from '@/utils'
+import apiClient from '@/lib/api'
 
 const LoginForm = () => {
     const router = useRouter()
@@ -26,11 +28,17 @@ const LoginForm = () => {
 
     const onSubmit = (data: LoginFormData) => {
         loginMutation.mutate(data, {
-            onSuccess: () => {
+            onSuccess: async () => {
+                try {
+                    const userResponse = await apiClient.get('/auth/me');
+                    setUser(userResponse.data);
+                } catch (error) {
+                    console.error('Failed to fetch user data', error);
+                }
                 router.navigate({ to: '/dashboard' })
             },
             onError: (error: any) => {
-                toast.error(error.response?.data?.message || 'Failed to login')
+                toast.error(error.response?.data?.message || 'Błąd logowania')
             }
         })
     }

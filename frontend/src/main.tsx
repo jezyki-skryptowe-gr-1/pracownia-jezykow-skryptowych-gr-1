@@ -11,10 +11,13 @@ import { routeTree } from './routeTree.gen'
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 
+// Create a client
+const queryClient = new QueryClient()
+
 // Create a new router instance
 export const router = createRouter({
     routeTree,
-    context: {},
+    context: { queryClient },
     defaultPreload: 'intent',
     scrollRestoration: true,
     defaultStructuralSharing: true,
@@ -24,12 +27,13 @@ export const router = createRouter({
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
     interface Register {
-        router: typeof router
+        router: typeof router & {
+            context: {
+                queryClient: typeof queryClient
+            }
+        }
     }
 }
-
-// Create a client
-const queryClient = new QueryClient()
 
 // Render the app
 const rootElement = document.getElementById('app')
