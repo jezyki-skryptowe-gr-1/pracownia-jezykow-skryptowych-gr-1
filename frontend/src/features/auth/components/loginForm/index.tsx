@@ -9,9 +9,12 @@ import FormInput from '@/components/formInput'
 import { loginSchema, type LoginFormData } from '@/features/auth/schemas'
 import { Lock, Mail } from 'lucide-react'
 import { Link, useRouter } from '@tanstack/react-router'
+import { useLoginMutation } from '@/features/auth/query'
+import { toast } from 'react-toastify'
 
 const LoginForm = () => {
     const router = useRouter()
+    const loginMutation = useLoginMutation()
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
@@ -22,8 +25,14 @@ const LoginForm = () => {
     })
 
     const onSubmit = (data: LoginFormData) => {
-        console.log('Form submitted:', data)
-        router.navigate({ to: '/dashboard' })
+        loginMutation.mutate(data, {
+            onSuccess: () => {
+                router.navigate({ to: '/dashboard' })
+            },
+            onError: (error: any) => {
+                toast.error(error.response?.data?.message || 'Failed to login')
+            }
+        })
     }
 
     return (
@@ -57,8 +66,9 @@ const LoginForm = () => {
                         <Button
                             type="submit"
                             className="w-full h-11 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all"
+                            disabled={loginMutation.isPending}
                         >
-                            Zaloguj się
+                            {loginMutation.isPending ? 'Logowanie...' : 'Zaloguj się'}
                         </Button>
                     </form>
                 </Form>
