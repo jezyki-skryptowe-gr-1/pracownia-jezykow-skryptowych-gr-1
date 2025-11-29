@@ -1,7 +1,6 @@
-name: Manually deploy Frontend
+name: Reusable deploy
 
 on:
-  workflow_dispatch:
   workflow_call:
     secrets:
       HOOK_URL:
