@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { dashboardApi } from '../api';
-import { getUser } from '@/utils';
+import { useUserQuery } from '@/features/auth/query';
 
 export const useChartDataQuery = () => {
-    const user = getUser();
+    const { data: user } = useUserQuery();
+
     return useQuery({
         queryKey: ['chartData', user?.id],
-        queryFn: () => dashboardApi.getChartData(user?.id),
+        queryFn: () => dashboardApi.getChartData(),
         enabled: !!user,
     });
 };

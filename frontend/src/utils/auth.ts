@@ -1,4 +1,5 @@
-import apiClient from '@/lib/api';
+import { authApi } from '@/features/auth/api';
+import { queryClient, router } from '@/main';
 
 export interface User {
     id: number;
@@ -6,27 +7,24 @@ export interface User {
     name: string;
 }
 
-export const getUser = (): User | null => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
-};
-
-export const setUser = (user: User) => {
-    localStorage.setItem('user', JSON.stringify(user));
-};
-
-export const clearUser = () => {
-    localStorage.removeItem('user');
-};
-
 export const isAuthenticated = async (): Promise<boolean> => {
     try {
-        const response = await apiClient.get('/auth/me');
-        setUser(response.data);
+        await authApi.getMe();
         return true;
     } catch {
         return false;
     }
+};
+
+export const logout = async () => {
+    try {
+        await authApi.logout();
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+
+    queryClient.invalidateQueries({ queryKey: ['user'] });
+    router.navigate({ to: '/' });
 };
 
 export const requireAuth = async () => {

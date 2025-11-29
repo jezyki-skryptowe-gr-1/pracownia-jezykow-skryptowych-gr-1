@@ -12,7 +12,7 @@ import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 
 // Create a client
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 // Create a new router instance
 export const router = createRouter({
