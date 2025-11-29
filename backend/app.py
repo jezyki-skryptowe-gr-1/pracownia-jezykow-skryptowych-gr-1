@@ -5,10 +5,10 @@ import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from .services.categories_service import CategoriesService
-from .services.users_service import UsersService
-from .config import AppConfig
-from .services.expenses_service import ExpensesService
+from services.categories_service import CategoriesService
+from services.users_service import UsersService
+from config import AppConfig
+from services.expenses_service import ExpensesService
 
 
 def create_app() -> Flask:

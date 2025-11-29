@@ -8,7 +8,8 @@ class ExpensesService:
 
     def add_expense(self, category, amount):
         # todo
-        pass
+        expense_id = 123
+        return expense_id
 
     def update_expense(self, expense_id, category, amount):
         # todo
