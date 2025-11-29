@@ -2,6 +2,7 @@ name: Manually deploy Frontend
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   deploy:

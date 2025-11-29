@@ -46,4 +46,4 @@ jobs:
 
   call-deploy:
     needs: db-tests
-    uses: jezyki-skryptowe-gr-1/pracownia-jezykow-skryptowych-gr-1/.github/workflows/backend-deploy.yml@main
+    uses: jezyki-skryptowe-gr-1/pracownia-jezykow-skryptowych-gr-1/.github/workflows/backend-deploy.yaml@main
