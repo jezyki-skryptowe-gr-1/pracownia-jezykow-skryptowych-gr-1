@@ -2,6 +2,7 @@ name: Manually deploy Backend
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   deploy:

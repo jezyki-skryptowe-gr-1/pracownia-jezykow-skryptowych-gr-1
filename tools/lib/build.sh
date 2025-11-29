@@ -6,7 +6,7 @@ BACKEND_DIR=${PROJECT_ROOT}/backend
 FRONTEND_DIR=${PROJECT_ROOT}/frontend
 
 function build-backend() {
-    pip install --upgrade pip
+    pip install --upgrade pip && \
     pip install -r ${BACKEND_DIR}/requirements.txt
 }
 
@@ -14,14 +14,14 @@ function start-backend() {
     GUNICORN_WORKERS="${1:-2}"
     BACKEND_HOST="${2:-0.0.0.0}"
     BACKEND_PORT="${3:-5000}"
-    cd ${BACKEND_DIR}
+    cd ${BACKEND_DIR} && \
     exec gunicorn -w "${GUNICORN_WORKERS}" \
         -b "${BACKEND_HOST}:${BACKEND_PORT}" \
         app:app
 }
 
 function build-frontend() {
-    npm install ${FRONTEND_DIR}
+    npm install ${FRONTEND_DIR} && \
 	npm run --prefix ${FRONTEND_DIR} build
 	trap "rm ${PWD}/package.json ${PWD}/package-lock.json" 1 2 3 6
 }
@@ -31,7 +31,7 @@ function start-frontend() {
 }
 
 function test-backend() {
-    cd ${BACKEND_DIR}
+    cd ${BACKEND_DIR} && \
     pytest
 }
 
