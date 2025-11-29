@@ -5,8 +5,8 @@ import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from services.categories_service import CategoriesService
-from services.users_service import UsersService
+from .services.categories_service import CategoriesService
+from .services.users_service import UsersService
 from .config import AppConfig
 from .services.expenses_service import ExpensesService
 
@@ -31,25 +31,25 @@ def create_app() -> Flask:
         return jsonify({"status": "ok"}), 200
 
     @app.post("/api/v1/register")
-    def register():
+    def add_user():
         data = request.get_json()
         lgn = data["login"]
         password = data["password"]
-        users_service.register(lgn, password)
-        return jsonify({"status": "ok"}), 200
+        return "", 200
 
     @app.post("/api/v1/login")
     def login():
         data = request.get_json()
         lgn = data["login"]
         password = data["password"]
-        users_service.login(lgn, password)
-        return jsonify({"status": "ok"}), 200
+        return "", 200
 
     @app.put("/api/v1/refresh_token")
     def refresh_token():
-        users_service.refresh_token()
-        return jsonify({"status": "ok"}), 200
+        response = {
+            "token": users_service.refresh_token()
+        }
+        return jsonify(response), 200
 
     @app.put("/api/v1/update_user")
     def update_user():
