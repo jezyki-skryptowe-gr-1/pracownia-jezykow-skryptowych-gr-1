@@ -1,5 +1,5 @@
 import os
-from .decorators import singleton
+from decorators import singleton
 
 
 @singleton

@@ -37,11 +37,3 @@ def singleton(cls: Type[Any]) -> Type[Any]:
     setattr(cls, "get_singleton", get_singleton)
     return cls
 
-
-# Backward compatibility: keep Decorators.singleton alias for older imports
-class Decorators:
-    """Deprecated: use `@singleton` instead of `@Decorators.singleton`."""
-
-    @staticmethod
-    def singleton(cls: Type[Any]) -> Type[Any]:
-        return singleton(cls)

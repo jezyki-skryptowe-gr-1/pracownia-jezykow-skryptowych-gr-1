@@ -40,7 +40,7 @@ def create_app() -> Flask:
         return "", 200
 
     @app.post("/api/v1/register")
-    def add_user():
+    def add_user_2():
         data = request.get_json()
         lgn = data["login"]
         password = data["password"]
@@ -134,6 +134,6 @@ app = create_app()
 
 
 if __name__ == "__main__":
-    cfg = AppConfig.get_instance()
+    cfg = AppConfig.get_singleton()
     port = int(os.getenv("PORT", cfg.port))
     app.run(host=cfg.host, port=port, debug=cfg.debug)

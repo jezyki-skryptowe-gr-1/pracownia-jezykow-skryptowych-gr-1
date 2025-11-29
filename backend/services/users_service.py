@@ -1,6 +1,6 @@
-from ..decorators import singleton
-from ..config import AppConfig
-from ..repository.users_repository import create_user, get_all_users
+from decorators import singleton
+from config import AppConfig
+from repository.users_repository import create_user, get_all_users
 
 
 @singleton
