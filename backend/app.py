@@ -52,6 +52,7 @@ def create_app() -> Flask:
         data = request.get_json()
         lgn = data["login"]
         password = data["password"]
+        users_service.register_user(lgn, password)
         return "", 200
 
     @app.post("/api/v1/login")
@@ -59,11 +60,14 @@ def create_app() -> Flask:
         data = request.get_json()
         lgn = data["login"]
         password = data["password"]
-        response = {
-            "auth_token": create_access_token(identity=lgn),
-            "refresh_token": create_refresh_token(identity=lgn)
-        }
-        return response, 200
+        if users_service.check_password(lgn, password):
+            response = {
+                "auth_token": create_access_token(identity=lgn),
+                "refresh_token": create_refresh_token(identity=lgn)
+            }
+            return response, 200
+        else:
+            return "", 401
 
     @app.put("/api/v1/refresh_token")
     @jwt_required(refresh=True)

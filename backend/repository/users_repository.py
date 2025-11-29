@@ -4,8 +4,11 @@ from entities.user import User
 from typing import Optional
 
 
+def hash_password(password: str) -> str:
+    return hashlib.sha256(password.encode()).hexdigest()
+
 def create_user(username, password):
-    password_hash = hashlib.sha512(password.encode('utf-8')).hexdigest()
+    password_hash = hash_password(password)
 
     with db.connection.get_connection() as conn:
         with conn.cursor() as cur:
