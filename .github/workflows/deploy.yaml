@@ -15,6 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy PROD
-        run: bash tools/deploy-to-render INPUT_HOOK_URL
-        with:
+        run: bash tools/deploy-to-render HOOK_URL
+        env:
           HOOK_URL: ${{ secrets.HOOK_URL }}
