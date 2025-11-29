@@ -14,7 +14,7 @@ export const addExpenseSchema = z.object({
     }),
     category: z.string().min(1, 'Kategoria jest wymagana'),
     date: z.date({
-        required_error: 'Data jest wymagana',
+        message: 'Data jest wymagana',
     }),
 })
 

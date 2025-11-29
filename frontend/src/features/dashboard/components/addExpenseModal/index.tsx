@@ -42,7 +42,6 @@ export function AddExpenseModal({ open, onOpenChange }: AddExpenseModalProps) {
 
     const onSubmit = (data: AddExpenseFormData) => {
         console.log("[v0] Adding expense:", data)
-        // TODO: Implement expense adding logic
         form.reset()
         onOpenChange(false)
     }
