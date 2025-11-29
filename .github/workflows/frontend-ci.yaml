@@ -31,15 +31,7 @@ jobs:
       - name: Frontend build
         run: ./tools/build-frontend
 
-  deploy:
-    name: Deploy to Render
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main')
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deploy PROD
-        if: github.ref == 'refs/heads/main'
-        env:
-          RENDER_FRONTEND_HOOK: ${{ secrets.RENDER_FRONTEND_PROD_HOOK }}
-        run: bash tools/deploy-to-render RENDER_FRONTEND_HOOK
+  call-deploy:
+    uses: ./.github/workflows/deploy.yaml
+    secrets:
+        HOOK_URL: ${{ secrets.RENDER_FRONTEND_PROD_HOOK }}

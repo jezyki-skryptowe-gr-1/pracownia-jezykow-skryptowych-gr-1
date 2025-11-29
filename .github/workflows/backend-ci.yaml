@@ -37,28 +37,16 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python 3.14
         uses: actions/setup-python@v5
         with:
           python-version: '3.14'
-
-      - name: Install backend dependencies
-        run: ./tools/build-backend
-
       - name: Run Integration Tests
         run: ./tools/test-backend
 
-
-  deploy:
-    name: Deploy to Render
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main')
+  call-deploy:
     needs: db-tests
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deploy PROD
-        if: github.ref == 'refs/heads/main'
-        env:
-          RENDER_BACKEND_HOOK: ${{ secrets.RENDER_BACKEND_PROD_HOOK }}
-        run: bash tools/deploy-to-render RENDER_BACKEND_HOOK
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yaml
+    secrets:
+      HOOK_URL: ${{ secrets.RENDER_BACKEND_PROD_HOOK }}
